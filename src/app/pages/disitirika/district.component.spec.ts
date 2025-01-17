@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DistrictComponent } from './district.component';
+import { DistrictComponent } from '../../components/district/district.component';
 
 describe('DistrictComponent', () => {
   let component: DistrictComponent;
@@ -8,9 +8,8 @@ describe('DistrictComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DistrictComponent ]
-    })
-    .compileComponents();
+      declarations: [DistrictComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

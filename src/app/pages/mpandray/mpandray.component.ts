@@ -2,9 +2,15 @@ import { formatNumber } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faCalendar, faEdit, faMoneyCheck, faTrash, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { District } from 'src/app/district';
-import { Mpandray } from 'src/app/mpandray';
+import {
+  faCalendar,
+  faEdit,
+  faMoneyCheck,
+  faTrash,
+  faUserPlus,
+} from '@fortawesome/free-solid-svg-icons';
+import { District } from 'src/app/pages/disitirika/district';
+import { Mpandray } from 'src/app/pages/mpandray/mpandray';
 import { AdidyService } from 'src/app/services/adidy.service';
 import { DistrictService } from 'src/app/services/district.service';
 import { MpandrayService } from 'src/app/services/mpandray.service';
@@ -12,7 +18,7 @@ import { MpandrayService } from 'src/app/services/mpandray.service';
 @Component({
   selector: 'app-mpandray',
   templateUrl: './mpandray.component.html',
-  styleUrls: ['./mpandray.component.css']
+  styleUrls: ['./mpandray.component.css'],
 })
 export class MpandrayComponent implements OnInit {
   faUserPlus = faUserPlus;
@@ -26,7 +32,12 @@ export class MpandrayComponent implements OnInit {
   toEdit: any = {};
   toDelete: any = {};
 
-  constructor(private mpandrayService: MpandrayService, private adidyService: AdidyService, private districtService: DistrictService, private router: Router) { }
+  constructor(
+    private mpandrayService: MpandrayService,
+    private adidyService: AdidyService,
+    private districtService: DistrictService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchMpandray();
@@ -34,7 +45,7 @@ export class MpandrayComponent implements OnInit {
   }
 
   fetchMpandray() {
-    this.mpandrayService.getAllMpandray().subscribe(response => {
+    this.mpandrayService.getAllMpandray().subscribe((response) => {
       if (response.success) {
         this.mpandrayList = response.mpandray;
       }
@@ -42,7 +53,7 @@ export class MpandrayComponent implements OnInit {
   }
 
   fetchDistricts() {
-    this.districtService.getAllDistricts().subscribe(response => {
+    this.districtService.getAllDistricts().subscribe((response) => {
       if (response.success) {
         this.districtsList = response.districts;
       }
@@ -50,7 +61,7 @@ export class MpandrayComponent implements OnInit {
   }
 
   onAddMpandraySubmit(form: NgForm) {
-    document.getElementById("close-add-mpandray")?.click();
+    document.getElementById('close-add-mpandray')?.click();
 
     const name = form.value.name;
     const gender = form.value.gender;
@@ -69,10 +80,10 @@ export class MpandrayComponent implements OnInit {
       dateOfBirth: dateOfBirth,
       phone: phone,
       email: email,
-      facebook: facebook
+      facebook: facebook,
     };
 
-    this.mpandrayService.createMpandray(reqObject).subscribe(response => {
+    this.mpandrayService.createMpandray(reqObject).subscribe((response) => {
       if (response.success) {
         this.fetchMpandray();
         form.reset();
@@ -96,10 +107,10 @@ export class MpandrayComponent implements OnInit {
       mpandray: mpandray,
       beginAt: beginAt,
       endAt: endAt,
-      total: total
+      total: total,
     };
 
-    this.adidyService.createAdidy(reqObj).subscribe(response => {
+    this.adidyService.createAdidy(reqObj).subscribe((response) => {
       if (response.success) {
         this.router.navigate(['adidy']);
       }
@@ -132,10 +143,10 @@ export class MpandrayComponent implements OnInit {
       dateOfBirth: dateOfBirth,
       phone: phone,
       email: email,
-      facebook: facebook
+      facebook: facebook,
     };
 
-    this.mpandrayService.updateMpandray(reqObject).subscribe(response => {
+    this.mpandrayService.updateMpandray(reqObject).subscribe((response) => {
       if (response.success) {
         this.fetchMpandray();
       }
@@ -149,7 +160,7 @@ export class MpandrayComponent implements OnInit {
   removeMpandray(mpandray: Mpandray) {
     document.getElementById('close-delete')?.click();
 
-    this.mpandrayService.deleteMpandray(mpandray).subscribe(response => {
+    this.mpandrayService.deleteMpandray(mpandray).subscribe((response) => {
       if (response.success) {
         this.fetchMpandray();
       }

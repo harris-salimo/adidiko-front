@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faEdit, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { District } from 'src/app/district';
+import { District } from 'src/app/pages/disitirika/district';
 import { DistrictService } from 'src/app/services/district.service';
 
 @Component({
   selector: 'app-district',
   templateUrl: './district.component.html',
-  styleUrls: ['./district.component.css']
+  styleUrls: ['./district.component.css'],
 })
 export class DistrictComponent implements OnInit {
   faPlus = faPlus;
@@ -17,30 +17,30 @@ export class DistrictComponent implements OnInit {
   toDelete: any = {};
   districtList: District[] = [];
 
-  constructor(private service: DistrictService) { }
+  constructor(private service: DistrictService) {}
 
   ngOnInit(): void {
     this.fetchDistricts();
   }
 
   fetchDistricts() {
-    this.service.getAllDistricts().subscribe(response => {
+    this.service.getAllDistricts().subscribe((response) => {
       if (response.success) {
-        this.districtList = response.districts;   
+        this.districtList = response.districts;
       }
     });
   }
 
   onAddSubmit(form: NgForm) {
     document.getElementById('close-add')?.click();
-    
+
     const name = form.value.name;
 
     const reqObject = {
-      name: name
+      name: name,
     };
 
-    this.service.createDistrict(reqObject).subscribe(response => {
+    this.service.createDistrict(reqObject).subscribe((response) => {
       if (response.success) {
         this.fetchDistricts();
         form.reset();
@@ -60,10 +60,10 @@ export class DistrictComponent implements OnInit {
 
     const reqObject = {
       id: id,
-      name: name
-    }
+      name: name,
+    };
 
-    this.service.updateDistrict(reqObject).subscribe(response => {
+    this.service.updateDistrict(reqObject).subscribe((response) => {
       if (response.success) {
         this.fetchDistricts();
       }
@@ -76,8 +76,8 @@ export class DistrictComponent implements OnInit {
 
   removeDistrict(district: District) {
     document.getElementById('close-delete');
-    
-    this.service.deleteDistrict(district).subscribe(response => {
+
+    this.service.deleteDistrict(district).subscribe((response) => {
       if (response.success) {
         this.fetchDistricts();
       }

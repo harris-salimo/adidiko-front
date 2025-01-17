@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { faUserEdit, faUserTimes } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/user';
+import { User } from 'src/app/pages/mpampiasa/user';
 
 @Component({
   selector: 'app-user',
