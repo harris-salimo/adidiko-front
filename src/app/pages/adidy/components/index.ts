@@ -1,0 +1,1 @@
+export {AdidyComponent} from './adidy.component'

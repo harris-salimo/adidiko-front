@@ -1,0 +1,1 @@
+export {MpandrayService} from './mpandray.service'

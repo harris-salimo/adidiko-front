@@ -1,0 +1,1 @@
+export {MpandrayComponent} from './mpandray.component'

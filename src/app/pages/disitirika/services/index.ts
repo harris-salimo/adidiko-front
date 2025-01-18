@@ -1,0 +1,1 @@
+export {DisitirikaService} from './disitirika.service'

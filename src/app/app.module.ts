@@ -2,81 +2,49 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './components/user/user.component';
-import { MpandrayComponent } from './components/mpandray/mpandray.component';
-import { AdidyComponent } from './components/adidy/adidy.component';
-import { DistrictComponent } from './components/district/district.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
-import { LogoutComponent } from './components/logout/logout.component';
-import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthService } from './pages/auth/services';
+import { AuthGuard } from './pages/auth/guards/auth.guard';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MycurrencyPipe } from './pipes/mycurrency.pipe';
 import { MydatePipe } from './pipes/mydate.pipe';
 import { Mydate2Pipe } from './pipes/mydate2.pipe';
-
-const appRoutes: Routes = [
-  {path: 'logout', component: LogoutComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  // {path: 'dashboard', component: DashboardComponent},
-  {path: 'mpampiasa', component: UserComponent, canActivate: [AuthGuard]},
-  // {path: 'dashboard/mpampiasa', component: UserComponent},
-  {path: 'mpandray', component: MpandrayComponent, canActivate: [AuthGuard]},
-  // {path: 'dashboard/mpandray', component: MpandrayComponent},
-  {path: 'adidy', component: AdidyComponent, canActivate: [AuthGuard]},
-  // {path: 'dashboard/adidy', component: AdidyComponent},
-  {path: 'kartie', component: DistrictComponent, canActivate: [AuthGuard]},
-  // {path: 'dashboard/kartie', component: DistrictComponent},
-  {path: '', redirectTo: 'register', pathMatch: 'full'},
-];
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    MpandrayComponent,
-    AdidyComponent,
-    DistrictComponent,
-    DashboardComponent,
-    LoginComponent,
-    LogoutComponent,
-    RegisterComponent,
     NavbarComponent,
     SidebarComponent,
     MycurrencyPipe,
     MydatePipe,
-    Mydate2Pipe
+    Mydate2Pipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes, {useHash: true}),
+    RouterModule.forRoot(routes, { useHash: true }),
     HttpClientModule,
     FormsModule,
     ChartsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
-    AuthGuard
+    AuthGuard,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

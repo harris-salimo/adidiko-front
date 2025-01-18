@@ -1,0 +1,1 @@
+export type {Adidy} from './adidy'
